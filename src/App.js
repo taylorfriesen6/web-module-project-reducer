@@ -6,15 +6,18 @@ import TotalDisplay from './components/TotalDisplay';
 import CalcButton from './components/CalcButton';
 
 import reducer, {initialState} from './reducers';
-import {applyNumber} from './actions';
+import {applyNumber, changeOperation} from './actions';
 
 function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleNumClick = (e) => {
-    console.log(e.target.textContent);
     dispatch(applyNumber(parseInt(e.target.textContent)));
+  }
+
+  const handleOpClick = (e) => {
+    dispatch(changeOperation(e.target.textContent));
   }
 
   return (
@@ -58,9 +61,9 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={"+"}/>
-              <CalcButton value={"*"}/>
-              <CalcButton value={"-"}/>
+              <CalcButton value={"+"} onClick={handleOpClick}/>
+              <CalcButton value={"*"} onClick={handleOpClick}/>
+              <CalcButton value={"-"} onClick={handleOpClick}/>
             </div>
 
             <div className="row ce_button">
